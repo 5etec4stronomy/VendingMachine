@@ -15,7 +15,16 @@ namespace VendingMachine.Tests
         public void Setup()
         {
             _display = new Display();
-            _sut = new Processor(_display, new CoinValidator());
+
+            _sut = new Processor(_display, new CoinValidator())
+            {
+                Products = new List<Product>
+                {
+                    new Product { ProductType = ProductType.Cola, SellPrice = 1, StockLevel = 5 },
+                    new Product { ProductType = ProductType.Chips, SellPrice = 0.5m, StockLevel = 10 },
+                    new Product { ProductType = ProductType.Candy, SellPrice = 0.65m, StockLevel = 15 }
+                }
+            };
         }
 
         [Test]
@@ -55,15 +64,24 @@ namespace VendingMachine.Tests
 
         [Test]
         public void SelectProduct_EnoughMoney_ReturnsProductAndTHANKYOUMessage()
-        {
+        {            
             //test adding 10 dimes
             var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
 
             _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
 
-            _sut.SelectProduct();
+            _sut.SelectProduct(ProductType.Cola);
 
-            Assert.IsTrue(_sut.SelectProductResult);
+            Assert.IsTrue(_sut.ProductDispensed);
         }
     }
 }

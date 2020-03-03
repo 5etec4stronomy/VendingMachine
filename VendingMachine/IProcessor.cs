@@ -8,11 +8,12 @@ namespace VendingMachine
     {
         List<Coin> CurrentTransaction { get; }
         List<Coin> CoinReturn { get; }
+        List<Product> Products { get; set; }
 
         decimal CurrentTransactionBalance { get; }
-        bool SelectProductResult { get; }
+        bool ProductDispensed { get; }
 
         void AcceptCoin(Coin coin);
-        void SelectProduct();
+        void SelectProduct(ProductType productType);
     }
 }

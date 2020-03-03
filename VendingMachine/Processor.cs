@@ -8,9 +8,10 @@ namespace VendingMachine
     {
         public List<Coin> CurrentTransaction { get; private set; }
         public List<Coin> CoinReturn { get; private set; }
+        public List<Product> Products { get; set; }
 
         public decimal CurrentTransactionBalance => CurrentTransaction.Sum(c => c.Value);
-        public bool SelectProductResult { get; private set; }
+        public bool ProductDispensed { get; private set; }
 
         private readonly IDisplay _display;
         private readonly ICoinValidator _coinValidator;
@@ -54,9 +55,27 @@ namespace VendingMachine
             (CoinReturn ?? (CoinReturn = new List<Coin>())).Add(coin);
         }
 
-        public void SelectProduct()
+        /// <summary>
+        /// Allows the customer to select and purchase a product, assuming they have enough money and it is in stock
+        /// </summary>
+        /// <param name="productType"></param>
+        public void SelectProduct(ProductType productType)
         {
-            SelectProductResult = true;
+            var selectedProduct = Products.Find(p => p.ProductType == productType);
+
+            if (selectedProduct != null)
+            {
+                if (CurrentTransactionBalance >= selectedProduct.SellPrice && selectedProduct.StockLevel > 0)
+                {
+                    //dispense the product
+                    selectedProduct.StockLevel--;
+                    CurrentTransaction.Clear();
+                    _display.SetMessage("THANK YOU");
+
+                    ProductDispensed = true;
+
+                }
+            }
         }
     }
 }
