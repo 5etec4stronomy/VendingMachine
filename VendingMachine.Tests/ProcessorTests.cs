@@ -153,7 +153,18 @@ namespace VendingMachine.Tests
         [Test]
         public void ReturnMoney_ResetBalance_DisplayDefaultMessage()
         {
+            var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
+
+            //insert some coins so we have something to be returned
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+
             _sut.ReturnCoins();
+
+            Assert.AreEqual("INSERT COIN", _display.Message);
+            Assert.AreEqual(3, _sut.CoinReturn.Count);
+            Assert.AreEqual(0, _sut.CurrentTransaction.Count);
         }
     }
 }

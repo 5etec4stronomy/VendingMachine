@@ -90,10 +90,16 @@ namespace VendingMachine
             }
         }
 
-
+        /// <summary>
+        /// Returns the deposited coins to the customer
+        /// </summary>
         public void ReturnCoins()
         {
-            throw new NotImplementedException();
+            CoinReturn = new List<Coin>(CurrentTransaction);
+
+            CurrentTransaction.Clear();
+
+            _display.SetMessage("INSERT COIN");
         }
 
         /// <summary>
