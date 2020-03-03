@@ -8,6 +8,10 @@ namespace VendingMachine
     {
         public MatchedCoinResult MatchedCoinResult { get; private set; }
 
+        /// <summary>
+        /// Validates a coin against the supplied list of accepted ones
+        /// </summary>
+        /// <param name="coin">The coin to be validated</param>
         public void ValidateCoin(Coin coin)
         {
             var validCoins = new List<Coin>
@@ -19,7 +23,7 @@ namespace VendingMachine
 
             MatchedCoinResult = new MatchedCoinResult
             {
-                Coin = validCoins.Find(match: c => c.Weight == coin.Weight && coin.Diameter == c.Diameter)
+                Coin = validCoins.Find(c => c.Weight == coin.Weight && coin.Diameter == c.Diameter)
             };
         }
     }

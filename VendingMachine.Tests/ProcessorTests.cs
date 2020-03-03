@@ -15,7 +15,7 @@ namespace VendingMachine.Tests
         public void Setup()
         {
             _display = new Display();
-            _sut = new Processor(_display);
+            _sut = new Processor(_display, new CoinValidator());
         }
 
         [Test]
@@ -27,9 +27,9 @@ namespace VendingMachine.Tests
         [Test]
         public void AcceptCoin_InsertSingleCoin_ReturnsCurrentBalance()
         {
-            _sut.AcceptCoin(new Coin { Value = 1} );
+            _sut.AcceptCoin(new Coin { Diameter = 17.91m, Weight = 2.268m } );
 
-            Assert.AreEqual(1, _sut.CurrentTransactionBalance);
+            Assert.AreEqual(0.1m, _sut.CurrentTransactionBalance);
         }
     }
 }

@@ -10,10 +10,12 @@ namespace VendingMachine
         public decimal CurrentTransactionBalance => CurrentTransaction.Sum(c => c.Value);
 
         private readonly IDisplay _display;
+        private readonly ICoinValidator _coinValidator;
 
-        public Processor(IDisplay display)
+        public Processor(IDisplay display, ICoinValidator coinValidator)
         {
             _display = display;
+            _coinValidator = coinValidator;
 
             _display.SetMessage("INSERT COIN");
 
@@ -21,7 +23,13 @@ namespace VendingMachine
 
         public void AcceptCoin(Coin coin)
         {
-            (CurrentTransaction ?? (CurrentTransaction = new List<Coin>())).Add(coin);
+            _coinValidator.ValidateCoin(coin);
+
+            if (_coinValidator.MatchedCoinResult.ValidCoin)
+            {
+                (CurrentTransaction ?? (CurrentTransaction = new List<Coin>())).Add(_coinValidator.MatchedCoinResult.Coin);
+
+            }
         }
     }
 }
