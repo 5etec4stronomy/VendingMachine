@@ -48,6 +48,9 @@ namespace VendingMachine.Tests
             var invalidCoin = new Coin { Diameter = 20m, Weight = 6 };
 
             _sut.AcceptCoin(invalidCoin);
+
+            Assert.AreEqual(1, _sut.CoinReturn.Count);
+            Assert.AreEqual(invalidCoin, _sut.CoinReturn[0]);
         }
     }
 }
