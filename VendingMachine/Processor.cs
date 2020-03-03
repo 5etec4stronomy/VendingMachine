@@ -7,10 +7,13 @@ namespace VendingMachine
     public class Processor : IProcessor
     {
         public List<Coin> CurrentTransaction { get; private set; }
+        public List<Coin> MachineFloat { get; set; }
         public List<Coin> CoinReturn { get; private set; }
         public List<Product> Products { get; set; }
 
         public decimal CurrentTransactionBalance => CurrentTransaction.Sum(c => c.Value);
+        public decimal MachineCoinBalanceTotal => MachineFloat.Sum(_ => _.Value);
+
         public bool ProductDispensed { get; private set; }
 
         private readonly IDisplay _display;
@@ -21,8 +24,11 @@ namespace VendingMachine
             _display = display;
             _coinValidator = coinValidator;
 
-            _display.SetMessage("INSERT COIN");
+        }
 
+        public void ShowDefaultMessage()
+        {
+            _display.SetMessage(MachineCoinBalanceTotal > 0 ? "INSERT COIN" : throw new NotImplementedException());
         }
 
         /// <summary>

@@ -24,6 +24,13 @@ namespace VendingMachine.Tests
                     new Product { ProductType = ProductType.Cola, SellPrice = 1, StockLevel = 5 },
                     new Product { ProductType = ProductType.Chips, SellPrice = 0.5m, StockLevel = 10 },
                     new Product { ProductType = ProductType.Candy, SellPrice = 0.65m, StockLevel = 15 }
+                },
+                MachineFloat = new List<Coin>{
+
+                    new Coin { CoinType = CoinType.Quarter, Value = 0.25m, Diameter = 24.26m, Weight = 5.67m},
+                    new Coin { CoinType = CoinType.Quarter, Value = 0.25m, Diameter = 24.26m, Weight = 5.67m},
+                    new Coin { CoinType = CoinType.Quarter, Value = 0.25m, Diameter = 24.26m, Weight = 5.67m},
+                    new Coin { CoinType = CoinType.Quarter, Value = 0.25m, Diameter = 24.26m, Weight = 5.67m},
                 }
             };
         }
@@ -31,6 +38,7 @@ namespace VendingMachine.Tests
         [Test]
         public void DefaultMessage_SetMessage_ReturnsCorrectMessage()
         {
+            _sut.ShowDefaultMessage();
             Assert.AreEqual("INSERT COIN", _display.Message);
         }
 
@@ -165,6 +173,14 @@ namespace VendingMachine.Tests
             Assert.AreEqual("INSERT COIN", _display.Message);
             Assert.AreEqual(3, _sut.CoinReturn.Count);
             Assert.AreEqual(0, _sut.CurrentTransaction.Count);
+        }
+
+        [Test]
+        public void AcceptCoin_CoinBalance_ReturnsExactChangeMessage()
+        {
+            _sut.MachineFloat.Clear();
+            _sut.ShowDefaultMessage();
+
         }
     }
 }

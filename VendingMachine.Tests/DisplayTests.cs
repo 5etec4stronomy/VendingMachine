@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace VendingMachine.Tests
 {
     [TestFixture]
-    public class Tests
+    public class DisplayTests
     {
         [Test]
         public void ShowMessage_ValidMessage_ReturnSuppliedMessage()
