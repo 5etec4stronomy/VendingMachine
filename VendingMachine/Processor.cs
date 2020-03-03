@@ -21,14 +21,24 @@ namespace VendingMachine
 
         }
 
+        /// <summary>
+        /// Accepts a coin and allows it to count towards the current transaction if it is found to be valid
+        /// </summary>
+        /// <param name="coin">Coin to be accepted - must be valid otherwise it will be rejected</param>
         public void AcceptCoin(Coin coin)
         {
+            //validate this coin
             _coinValidator.ValidateCoin(coin);
 
             if (_coinValidator.MatchedCoinResult.ValidCoin)
             {
+                //coin is valid so allow it to be used
                 (CurrentTransaction ?? (CurrentTransaction = new List<Coin>())).Add(_coinValidator.MatchedCoinResult.Coin);
 
+            }
+            else
+            {
+                throw new NotImplementedException();
             }
         }
     }
