@@ -8,7 +8,7 @@ namespace VendingMachine
 
         public void SetMessage(string message)
         {
-            throw new NotImplementedException();
+            Message = message;
         }
     }
 }

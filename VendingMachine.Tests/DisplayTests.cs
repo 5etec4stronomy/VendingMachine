@@ -11,6 +11,8 @@ namespace VendingMachine.Tests
             IDisplay sut = new Display();
 
             sut.SetMessage("Test Message");
+
+            Assert.AreEqual("Test Message", sut.Message);
         }
     }
 }
