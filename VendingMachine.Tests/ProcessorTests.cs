@@ -27,9 +27,9 @@ namespace VendingMachine.Tests
         [Test]
         public void AcceptCoin_InsertSingleCoin_ReturnsCurrentBalance()
         {
-            _sut.AcceptCoin(1);
+            _sut.AcceptCoin(new Coin { Value = 1} );
 
-            Assert.AreEqual(1, _sut.CurrentBalance);
+            Assert.AreEqual(1, _sut.CurrentTransactionBalance);
         }
     }
 }

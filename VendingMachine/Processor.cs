@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace VendingMachine
 {
     public class Processor : IProcessor
     {
-        public Decimal CurrentBalance { get; private set; }
+        public List<Coin> CurrentTransaction { get; private set; }
+        public decimal CurrentTransactionBalance => CurrentTransaction.Sum(c => c.Value);
 
         private readonly IDisplay _display;
 
@@ -13,11 +16,12 @@ namespace VendingMachine
             _display = display;
 
             _display.SetMessage("INSERT COIN");
+
         }
 
-        public void AcceptCoin(decimal coinValue)
+        public void AcceptCoin(Coin coin)
         {
-            CurrentBalance += coinValue;
+            (CurrentTransaction ?? (CurrentTransaction = new List<Coin>())).Add(coin);
         }
     }
 }
