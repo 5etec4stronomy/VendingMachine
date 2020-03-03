@@ -7,6 +7,8 @@ namespace VendingMachine
     public class Processor : IProcessor
     {
         public List<Coin> CurrentTransaction { get; private set; }
+        public List<Coin> CoinReturn { get; private set; }
+
         public decimal CurrentTransactionBalance => CurrentTransaction.Sum(c => c.Value);
 
         private readonly IDisplay _display;
@@ -38,8 +40,18 @@ namespace VendingMachine
             }
             else
             {
-                throw new NotImplementedException();
+                RejectCoin(coin);
             }
         }
+
+        /// <summary>
+        /// Returns invalid coins to the Coin Reject - using a list to simulate the slot
+        /// </summary>
+        /// <param name="coin">Coin to be returned</param>
+        private void RejectCoin(Coin coin)
+        {
+            (CoinReturn ?? (CoinReturn = new List<Coin>())).Add(coin);
+        }
+
     }
 }

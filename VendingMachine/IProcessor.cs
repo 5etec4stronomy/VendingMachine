@@ -7,6 +7,7 @@ namespace VendingMachine
     public interface IProcessor
     {
         List<Coin> CurrentTransaction { get; }
+        List<Coin> CoinReturn { get; }
 
         decimal CurrentTransactionBalance { get; }
 
