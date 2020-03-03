@@ -28,7 +28,7 @@ namespace VendingMachine
 
         public void ShowDefaultMessage()
         {
-            _display.SetMessage(MachineCoinBalanceTotal > 0 ? "INSERT COIN" : throw new NotImplementedException());
+            _display.SetMessage(MachineCoinBalanceTotal > Products.OrderBy(p=>p.SellPrice).First().SellPrice ? "INSERT COIN" : "EXACT CHANGE ONLY");
         }
 
         /// <summary>
@@ -76,6 +76,7 @@ namespace VendingMachine
 
                     //dispense the product
                     selectedProduct.StockLevel--;
+                    MachineFloat.InsertRange(0, CurrentTransaction);
                     CurrentTransaction.Clear();
                     _display.SetMessage("THANK YOU");
 

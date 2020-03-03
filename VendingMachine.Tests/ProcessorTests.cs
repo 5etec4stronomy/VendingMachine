@@ -181,6 +181,7 @@ namespace VendingMachine.Tests
             _sut.MachineFloat.Clear();
             _sut.ShowDefaultMessage();
 
+            Assert.AreEqual("EXACT CHANGE ONLY", _display.Message);
         }
     }
 }
