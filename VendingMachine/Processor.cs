@@ -10,6 +10,7 @@ namespace VendingMachine
         public List<Coin> CoinReturn { get; private set; }
 
         public decimal CurrentTransactionBalance => CurrentTransaction.Sum(c => c.Value);
+        public bool SelectProductResult { get; private set; }
 
         private readonly IDisplay _display;
         private readonly ICoinValidator _coinValidator;
@@ -55,7 +56,7 @@ namespace VendingMachine
 
         public void SelectProduct()
         {
-            throw new NotImplementedException();
+            SelectProductResult = true;
         }
     }
 }

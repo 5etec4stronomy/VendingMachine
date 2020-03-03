@@ -10,6 +10,7 @@ namespace VendingMachine
         List<Coin> CoinReturn { get; }
 
         decimal CurrentTransactionBalance { get; }
+        bool SelectProductResult { get; }
 
         void AcceptCoin(Coin coin);
         void SelectProduct();

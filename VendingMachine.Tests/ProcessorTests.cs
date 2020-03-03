@@ -62,6 +62,8 @@ namespace VendingMachine.Tests
             _sut.AcceptCoin(testCoin);
 
             _sut.SelectProduct();
+
+            Assert.IsTrue(_sut.SelectProductResult);
         }
     }
 }
