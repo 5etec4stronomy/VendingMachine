@@ -11,7 +11,10 @@ namespace VendingMachine.Tests
         [Test]
         public void DefaultMessage_SetMessage_ReturnsCorrectMessage()
         {
-            IProcessor sut = new Processor();
+            IDisplay display = new Display();
+            IProcessor sut = new Processor(display);
+
+            Assert.AreEqual("INSERT COIN", display.Message);
         }
     }
 }
