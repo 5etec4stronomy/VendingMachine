@@ -31,5 +31,15 @@ namespace VendingMachine.Tests
 
             Assert.AreEqual(0.1m, _sut.CurrentTransactionBalance);
         }
+
+        [Test]
+        public void AcceptCoin_InsertMultipleCoins_ReturnsCurrentBalance()
+        {
+            _sut.AcceptCoin(new Coin { Diameter = 21.21m, Weight = 5 });
+            _sut.AcceptCoin(new Coin { Diameter = 17.91m, Weight = 2.268m });
+
+
+            Assert.AreEqual(0.15m, _sut.CurrentTransactionBalance);
+        }
     }
 }
