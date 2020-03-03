@@ -85,5 +85,15 @@ namespace VendingMachine.Tests
             Assert.AreEqual("THANK YOU", _display.Message);
             Assert.AreEqual(0m, _sut.CurrentTransactionBalance);
         }
+
+        [Test]
+        public void SelectProduct_NotEnoughMoney_ReturnsPRICEMessage()
+        {
+            var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
+
+            _sut.AcceptCoin(testCoin);
+
+            _sut.SelectProduct(ProductType.Cola);
+        }
     }
 }

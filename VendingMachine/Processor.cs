@@ -75,6 +75,10 @@ namespace VendingMachine
                     ProductDispensed = true;
 
                 }
+                else
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
     }
