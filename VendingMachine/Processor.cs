@@ -77,6 +77,7 @@ namespace VendingMachine
                 }
                 else
                 {
+                    _display.SetMessage($"PRICE {selectedProduct.SellPrice.ToString("N2")}");
                     ProductDispensed = false;
                 }
             }

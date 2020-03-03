@@ -91,11 +91,15 @@ namespace VendingMachine.Tests
         {
             var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
 
+            //add two dimes, which won't be enough
+            _sut.AcceptCoin(testCoin);
             _sut.AcceptCoin(testCoin);
 
             _sut.SelectProduct(ProductType.Cola);
 
             Assert.IsFalse(_sut.ProductDispensed);
+            Assert.AreEqual("PRICE 1.00", _display.Message);
+            Assert.AreEqual(0.2m, _sut.CurrentTransactionBalance);
         }
     }
 }
