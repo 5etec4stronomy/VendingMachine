@@ -6,6 +6,6 @@ namespace VendingMachine
 {
     public interface IProcessor
     {
-
+        void AcceptCoin();
     }
 }

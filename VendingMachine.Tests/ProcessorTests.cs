@@ -23,5 +23,11 @@ namespace VendingMachine.Tests
         {
             Assert.AreEqual("INSERT COIN", _display.Message);
         }
+
+        [Test]
+        public void AcceptCoin_InsertSingleCoin_ReturnsCurrentBalance()
+        {
+            _sut.AcceptCoin();
+        }
     }
 }

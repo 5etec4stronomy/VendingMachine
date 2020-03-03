@@ -6,13 +6,18 @@ namespace VendingMachine
 {
     public class Processor : IProcessor
     {
-        private IDisplay _display;
+        private readonly IDisplay _display;
 
         public Processor(IDisplay display)
         {
             _display = display;
 
             _display.SetMessage("INSERT COIN");
+        }
+
+        public void AcceptCoin()
+        {
+            throw new NotImplementedException();
         }
     }
 }
