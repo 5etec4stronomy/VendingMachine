@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace VendingMachine.Tests
@@ -107,6 +108,8 @@ namespace VendingMachine.Tests
         {
             var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
 
+            //add too many coins so we need a refund
+            _sut.AcceptCoin(testCoin);
             _sut.AcceptCoin(testCoin);
             _sut.AcceptCoin(testCoin);
             _sut.AcceptCoin(testCoin);
@@ -120,6 +123,8 @@ namespace VendingMachine.Tests
             _sut.AcceptCoin(testCoin);
 
             _sut.SelectProduct(ProductType.Cola);
+
+            Assert.AreEqual(0.20m, _sut.CoinReturn.Sum(c => c.Value));
         }
     }
 }

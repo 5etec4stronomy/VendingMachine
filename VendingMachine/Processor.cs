@@ -70,7 +70,7 @@ namespace VendingMachine
                     //too much money, so issue some change
                     if (CurrentTransactionBalance >= selectedProduct.SellPrice)
                     {
-                        throw new NotImplementedException();
+                        IssueChange(CurrentTransactionBalance - selectedProduct.SellPrice);
                     }
 
                     //dispense the product
@@ -87,6 +87,22 @@ namespace VendingMachine
                     ProductDispensed = false;
                 }
             }
+        }
+
+        private void IssueChange(decimal amountToReturn)
+        {
+            if (CoinReturn == null) CoinReturn = new List<Coin>();
+
+            var valCounter = 0m;
+            foreach (var coin in CurrentTransaction)
+            {
+                valCounter += coin.Value;
+
+                CoinReturn.Add(coin);
+
+                if (amountToReturn == valCounter) return;
+            }
+
         }
     }
 }
