@@ -82,6 +82,8 @@ namespace VendingMachine.Tests
             _sut.SelectProduct(ProductType.Cola);
 
             Assert.IsTrue(_sut.ProductDispensed);
+            Assert.AreEqual("THANK YOU", _display.Message);
+            Assert.AreEqual(0m, _sut.CurrentTransactionBalance);
         }
     }
 }
