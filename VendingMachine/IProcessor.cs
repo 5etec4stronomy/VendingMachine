@@ -15,5 +15,6 @@ namespace VendingMachine
 
         void AcceptCoin(Coin coin);
         void SelectProduct(ProductType productType);
+        void ReturnCoins();
     }
 }

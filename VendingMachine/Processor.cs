@@ -42,18 +42,12 @@ namespace VendingMachine
             }
             else
             {
+                //the coin isn't a valid one, so return it
                 RejectCoin(coin);
             }
         }
 
-        /// <summary>
-        /// Returns invalid coins to the Coin Reject - using a list to simulate the slot
-        /// </summary>
-        /// <param name="coin">Coin to be returned</param>
-        private void RejectCoin(Coin coin)
-        {
-            (CoinReturn ?? (CoinReturn = new List<Coin>())).Add(coin);
-        }
+
 
         /// <summary>
         /// Allows the customer to select and purchase a product, assuming they have enough money and it is in stock
@@ -61,6 +55,7 @@ namespace VendingMachine
         /// <param name="productType"></param>
         public void SelectProduct(ProductType productType)
         {
+            //ensure the product exists
             var selectedProduct = Products.Find(p => p.ProductType == productType);
 
             if (selectedProduct != null)
@@ -88,12 +83,32 @@ namespace VendingMachine
                 }
                 else
                 {
+                    //customer hasn't entered enough money, so remind them of the price
                     _display.SetMessage($"PRICE {selectedProduct.SellPrice.ToString("N2")}");
                     ProductDispensed = false;
                 }
             }
         }
 
+
+        public void ReturnCoins()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns invalid coins to the Coin Reject - using a list to simulate the slot
+        /// </summary>
+        /// <param name="coin">Coin to be returned</param>
+        private void RejectCoin(Coin coin)
+        {
+            (CoinReturn ?? (CoinReturn = new List<Coin>())).Add(coin);
+        }
+
+        /// <summary>
+        /// Issues change when a customer has entered more coins than are required
+        /// </summary>
+        /// <param name="amountToReturn">The amount to be returned</param>
         private void IssueChange(decimal amountToReturn)
         {
             if (CoinReturn == null) CoinReturn = new List<Coin>();
@@ -109,5 +124,6 @@ namespace VendingMachine
             }
 
         }
+
     }
 }

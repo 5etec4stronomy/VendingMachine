@@ -149,5 +149,11 @@ namespace VendingMachine.Tests
             _sut.SelectProduct(ProductType.Cola);
             Assert.AreEqual("SOLD OUT", _display.Message);
         }
+
+        [Test]
+        public void ReturnMoney_ResetBalance_DisplayDefaultMessage()
+        {
+            _sut.ReturnCoins();
+        }
     }
 }
