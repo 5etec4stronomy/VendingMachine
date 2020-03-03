@@ -6,7 +6,7 @@ namespace VendingMachine
 {
     public class CoinValidator : ICoinValidator
     {
-        public bool CoinValidationResult { get; private set; }
+        public MatchedCoinResult MatchedCoinResult { get; private set; }
 
         public void ValidateCoin(Coin coin)
         {
@@ -17,7 +17,10 @@ namespace VendingMachine
                 new Coin {CoinType = CoinType.Quarter, Value = 0.25m, Diameter = 24.26m, Weight = 5.67m},
             };
 
-            CoinValidationResult = validCoins.Find(c => c.Weight == coin.Weight && c.Diameter == coin.Diameter) != null;
+            MatchedCoinResult = new MatchedCoinResult
+            {
+                Coin = validCoins.Find(match: c => c.Weight == coin.Weight && coin.Diameter == c.Diameter)
+            };
         }
     }
 }

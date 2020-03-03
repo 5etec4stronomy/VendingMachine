@@ -6,7 +6,7 @@ namespace VendingMachine
 {
     public interface ICoinValidator
     {
-        bool CoinValidationResult { get; }
+        MatchedCoinResult MatchedCoinResult { get; }
 
         void ValidateCoin(Coin coin);
     }
