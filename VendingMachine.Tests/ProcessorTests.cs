@@ -64,7 +64,7 @@ namespace VendingMachine.Tests
 
         [Test]
         public void SelectProduct_EnoughMoney_ReturnsProductAndTHANKYOUMessage()
-        {            
+        {        
             //test adding 10 dimes
             var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
 
@@ -100,6 +100,26 @@ namespace VendingMachine.Tests
             Assert.IsFalse(_sut.ProductDispensed);
             Assert.AreEqual("PRICE 1.00", _display.Message);
             Assert.AreEqual(0.2m, _sut.CurrentTransactionBalance);
+        }
+
+        [Test]
+        public void SelectProduct_TooMuchMoney_ReturnsTHANKYOUMessageAndChange()
+        {
+            var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
+
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+
+            _sut.SelectProduct(ProductType.Cola);
         }
     }
 }

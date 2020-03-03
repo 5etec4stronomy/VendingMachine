@@ -67,6 +67,12 @@ namespace VendingMachine
             {
                 if (CurrentTransactionBalance >= selectedProduct.SellPrice && selectedProduct.StockLevel > 0)
                 {
+                    //too much money, so issue some change
+                    if (CurrentTransactionBalance >= selectedProduct.SellPrice)
+                    {
+                        throw new NotImplementedException();
+                    }
+
                     //dispense the product
                     selectedProduct.StockLevel--;
                     CurrentTransaction.Clear();
