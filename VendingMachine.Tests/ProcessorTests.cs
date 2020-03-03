@@ -126,5 +126,28 @@ namespace VendingMachine.Tests
 
             Assert.AreEqual(0.20m, _sut.CoinReturn.Sum(c => c.Value));
         }
+
+        [Test]
+        public void SelectProduct_ProductOutOfStock_ReturnsSoldOutMessage()
+        {
+            var testCoin = new Coin { Diameter = 17.91m, Weight = 2.268m };
+
+            //override the stock level of the cola
+            _sut.Products.Find(p => p.ProductType == ProductType.Cola).StockLevel = 0;
+
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+            _sut.AcceptCoin(testCoin);
+
+            _sut.SelectProduct(ProductType.Cola);
+            Assert.AreEqual("SOLD OUT", _display.Message);
+        }
     }
 }

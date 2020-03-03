@@ -81,6 +81,10 @@ namespace VendingMachine
                     ProductDispensed = true;
 
                 }
+                else if (CurrentTransactionBalance >= selectedProduct.SellPrice && selectedProduct.StockLevel == 0)
+                {
+                    throw new NotImplementedException();
+                }
                 else
                 {
                     _display.SetMessage($"PRICE {selectedProduct.SellPrice.ToString("N2")}");
