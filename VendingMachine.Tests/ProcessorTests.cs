@@ -94,6 +94,8 @@ namespace VendingMachine.Tests
             _sut.AcceptCoin(testCoin);
 
             _sut.SelectProduct(ProductType.Cola);
+
+            Assert.IsFalse(_sut.ProductDispensed);
         }
     }
 }
