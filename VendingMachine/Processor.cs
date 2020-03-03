@@ -83,7 +83,8 @@ namespace VendingMachine
                 }
                 else if (CurrentTransactionBalance >= selectedProduct.SellPrice && selectedProduct.StockLevel == 0)
                 {
-                    throw new NotImplementedException();
+                    //no stock so display the sold out message
+                    _display.SetMessage("SOLD OUT");
                 }
                 else
                 {
