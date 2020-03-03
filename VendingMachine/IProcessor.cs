@@ -6,6 +6,8 @@ namespace VendingMachine
 {
     public interface IProcessor
     {
-        void AcceptCoin();
+        Decimal CurrentBalance { get; }
+
+        void AcceptCoin(decimal coinValue);
     }
 }
