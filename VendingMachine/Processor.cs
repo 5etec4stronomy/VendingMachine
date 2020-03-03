@@ -53,5 +53,9 @@ namespace VendingMachine
             (CoinReturn ?? (CoinReturn = new List<Coin>())).Add(coin);
         }
 
+        public void SelectProduct()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

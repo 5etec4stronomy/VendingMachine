@@ -12,5 +12,6 @@ namespace VendingMachine
         decimal CurrentTransactionBalance { get; }
 
         void AcceptCoin(Coin coin);
+        void SelectProduct();
     }
 }
