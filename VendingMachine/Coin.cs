@@ -17,6 +17,7 @@ namespace VendingMachine
     {
         Nickel,
         Dime,
-        Quarter
+        Quarter,
+        Dollar
     }
 }

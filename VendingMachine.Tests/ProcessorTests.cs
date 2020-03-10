@@ -55,9 +55,10 @@ namespace VendingMachine.Tests
         {
             _sut.AcceptCoin(new Coin { Diameter = 21.21m, Weight = 5 });
             _sut.AcceptCoin(new Coin { Diameter = 17.91m, Weight = 2.268m });
+            _sut.AcceptCoin(new Coin { Diameter = 48.52m, Weight = 5.67m });
 
-
-            Assert.AreEqual(0.15m, _sut.CurrentTransactionBalance);
+            Assert.AreEqual(3, _sut.CurrentTransaction.Count);
+            Assert.AreEqual(1.15m, _sut.CurrentTransactionBalance);
         }
 
         [Test]
